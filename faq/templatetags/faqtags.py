@@ -25,7 +25,8 @@ class FaqListNode(template.Node):
         else:
             qs = Question.objects.all()
             
-        context[self.varname] = qs.filter(status=Question.ACTIVE)[:num]
+        context[self.varname] = qs.filter(
+            status__in=(Question.ACTIVE, Question.HEADER))[:num]
         return ''
 
 @register.tag
